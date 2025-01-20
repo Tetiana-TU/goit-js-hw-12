@@ -4,10 +4,13 @@ import 'izitoast/dist/css/iziToast.min.css';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 import { createGalleryCardTemplate } from './js/render-functions';
 import { fetchPhotosByQuery } from './js/pixabay-api';
+import axios from 'axios';
 
 const searchFormEl = document.querySelector('.js-search-form');
 const galleryEl = document.querySelector('.js-gallery');
 const loader = document.querySelector('.loader');
+const fetchBtn = document.querySelector('.btn');
+
 const onSearchFormSubmit = event => {
   event.preventDefault();
 
