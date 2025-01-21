@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 export const fetchPhotosByQuery = searchedQuery => {
   const searchParams = new URLSearchParams({
     q: searchedQuery,
@@ -5,13 +7,9 @@ export const fetchPhotosByQuery = searchedQuery => {
     image_type: 'photo',
     orientation: 'horizontal',
     safesearch: 'true',
+    page: '1',
+    per_page: '15',
+    totalHits: 'value',
   });
-
-  return fetch(`https://pixabay.com/api/?${searchParams}`).then(response => {
-    if (!response.ok) {
-      throw new Error(response.status);
-    }
-
-    return response.json();
-  });
+  return axios.get(`https://pixabay.com/api/?${searchParams}`);
 };
