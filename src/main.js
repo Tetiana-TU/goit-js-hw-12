@@ -49,10 +49,8 @@ const onSearchFormSubmit = async event => {
       .map(el => createGalleryCardTemplate(el))
       .join('');
     galleryEl.innerHTML = galleryTemplate;
-
     loader.classList.add('is-hidden');
     scrollDown();
-
     const gallery = new SimpleLightbox('.js-gallery a', {
       captionDelay: 300,
       captionsData: 'alt',
@@ -69,7 +67,6 @@ const onSearchFormSubmit = async event => {
 };
 
 searchFormEl.addEventListener('submit', onSearchFormSubmit);
-searchFormEl.addEventListener('submit', onSearchFormSubmit);
 
 const onLoadMoreBtnClick = async event => {
   try {
@@ -82,12 +79,11 @@ const onLoadMoreBtnClick = async event => {
       .join('');
 
     galleryEl.insertAdjacentHTML('beforeend', galleryTemplate);
-
-    if (page <= data.totalHits) {
+    scrollDown();
+    if (page === data.totalHits) {
       loadMoreBtnEl.classList.add('is-hidden');
 
       loadMoreBtnEl.removeEventListener('click', onLoadMoreBtnClick);
-      scrollDown();
     }
   } catch (err) {
     console.log(err);
