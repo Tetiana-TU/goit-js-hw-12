@@ -82,7 +82,6 @@ const onLoadMoreBtnClick = async event => {
     scrollDown();
     if (page === data.totalHits) {
       loadMoreBtnEl.classList.add('is-hidden');
-
       loadMoreBtnEl.removeEventListener('click', onLoadMoreBtnClick);
     }
   } catch (err) {
