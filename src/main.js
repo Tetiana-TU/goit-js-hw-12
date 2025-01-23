@@ -9,6 +9,7 @@ const searchFormEl = document.querySelector('.js-search-form');
 const galleryEl = document.querySelector('.js-gallery');
 const loader = document.querySelector('.loader');
 const loadMoreBtnEl = document.querySelector('.js-load-more-btn');
+
 let page = 1;
 let searchedQuery = '';
 const onSearchFormSubmit = async event => {
@@ -23,7 +24,9 @@ const onSearchFormSubmit = async event => {
       });
       return;
     }
+
     page = 1;
+
     loadMoreBtnEl.classList.add('is-hidden');
     loader.classList.remove('is-hidden');
 
@@ -51,16 +54,17 @@ const onSearchFormSubmit = async event => {
     galleryEl.innerHTML = galleryTemplate;
     loader.classList.add('is-hidden');
     scrollDown();
-    const gallery = new SimpleLightbox('.js-gallery a', {
-      captionDelay: 300,
-      captionsData: 'alt',
-    });
+    
     gallery.refresh();
 
     searchFormEl.reset();
   } catch {
     err => {
       loader.style.display = 'none';
+      iziToast.show({
+        message: `${error}`,
+        position: 'topRight',
+      });
       console.log(err);
     };
   }
@@ -80,12 +84,22 @@ const onLoadMoreBtnClick = async event => {
 
     galleryEl.insertAdjacentHTML('beforeend', galleryTemplate);
     scrollDown();
+    gallery.refresh();
+
     if (page === data.totalHits) {
-      loadMoreBtnEl.classList.add('is-hidden');
+     
       loadMoreBtnEl.removeEventListener('click', onLoadMoreBtnClick);
+      loadMoreBtnEl.classList.add('is-hidden');
     }
-  } catch (err) {
-    console.log(err);
+  } catch {
+    err => {
+      loader.style.display = 'none';
+      iziToast.show({
+        message: `${error}`,
+        position: 'topRight',
+      });
+      console.log(err);
+    };
   }
 };
 function scrollDown() {
@@ -98,3 +112,7 @@ function scrollDown() {
     behavior: 'smooth',
   });
 }
+const gallery = new SimpleLightbox('.js-gallery a', {
+  captionDelay: 300,
+  captionsData: 'alt',
+});
