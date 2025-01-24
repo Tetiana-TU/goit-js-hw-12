@@ -60,8 +60,7 @@ const onSearchFormSubmit = async event => {
     scrollDown();
     gallery.refresh();
     searchFormEl.reset();
-  } catch {
-    err => {
+  } .catch (error => {
       loader.style.display = 'none';
       iziToast.show({
         message: `${error}`,
@@ -92,8 +91,8 @@ const onLoadMoreBtnClick = async event => {
       loadMoreBtnEl.removeEventListener('click', onLoadMoreBtnClick);
       loader.style.display = 'none';
     }
-  } catch {
-    err => {
+  } .catch (
+    error => {
       iziToast.show({
         message: `${error}`,
         position: 'topRight',
