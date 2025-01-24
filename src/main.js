@@ -60,10 +60,10 @@ const onSearchFormSubmit = async event => {
     scrollDown();
     gallery.refresh();
     searchFormEl.reset();
-  } .catch (error => {
+  } .catch (error){
       loader.style.display = 'none';
       iziToast.show({
-        message: `${error}`,
+        message: 'error',
         position: 'topRight',
       });
     };
@@ -92,9 +92,9 @@ const onLoadMoreBtnClick = async event => {
       loader.style.display = 'none';
     }
   } .catch (
-    error => {
+    error) {
       iziToast.show({
-        message: `${error}`,
+        message: 'error',
         position: 'topRight',
       });
     };
