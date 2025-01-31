@@ -66,8 +66,9 @@ const onSearchFormSubmit = async event => {
         message: 'error',
         position: 'topRight',
       });
+    console.log(error);
     };
-
+}
 
 
 searchFormEl.addEventListener('submit', onSearchFormSubmit);
@@ -97,9 +98,10 @@ const onLoadMoreBtnClick = async event => {
         message: 'error',
         position: 'topRight',
       });
+      console.log(error);
     };
   }
-};
+
 function scrollDown() {
   let cardHeight = document
     .querySelector('.gallery-card')
